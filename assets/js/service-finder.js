@@ -1,9 +1,3 @@
-const __floridaUrl = (path) => {
-  const marker = document.querySelector('meta[name="site-root"]');
-  const root = marker ? new URL(marker.content, document.baseURI) : new URL('./', document.baseURI);
-  return new URL(String(path).replace(/^\//, ''), root).href;
-};
-
 /* ========================================
    SERVICE FINDER
    Small decision aid: no medical/technical diagnosis and no booking automation.
@@ -81,41 +75,41 @@ if(root){
     back.hidden=index===0;
     restart.hidden=true;
     continueBtn.hidden=false;
-    continueBtn.textContent=index===steps.length-1?'Voir ma recommandation':'Continuer';
+    continueBtn.textContent=index===steps.length-1?'Continuer':'Continuer';
     if(finderError)finderError.textContent='';
     if(moveFocus)stage.querySelector('input:checked,input')?.focus();
   }
 
   function resultData(){
     if(state.universe==='nails'){
-      if(state.nailZone==='both') return {title:'Formule mains + pieds',url:__floridaUrl('/ongles/#formules'),why:'Vous souhaitez coordonner les deux zones : les formules combinées permettent de prévoir mains et pieds dans un même parcours.',alts:[['Voir les prestations mains',__floridaUrl('/ongles/#mains')],['Voir les prestations pieds',__floridaUrl('/ongles/pieds/')]]};
-      if(state.nailZone==='feet') return {title:'Prestations pieds',url:__floridaUrl('/ongles/pieds/'),why:'Votre besoin concerne les pieds : la page onglerie regroupe désormais les options dédiées dans une section séparée.',alts:[['Voir l’onglerie',__floridaUrl('/ongles/')]]};
+      if(state.nailZone==='both') return {title:'Formule mains + pieds',url:'/ongles/#formules',why:'Vous souhaitez coordonner les deux zones : les formules combinées permettent de prévoir mains et pieds dans un même parcours.',alts:[['Voir les prestations mains','/ongles/#mains'],['Voir les prestations pieds','/ongles/pieds/']]};
+      if(state.nailZone==='feet') return {title:'Prestations pieds',url:'/ongles/pieds/',why:'Votre besoin concerne les pieds : la page onglerie regroupe désormais les options dédiées dans une section séparée.',alts:[['Voir l’onglerie','/ongles/']]};
       const map={
-        semi:['Semi-permanent renforcé',__floridaUrl('/ongles/semi-permanent/'),'Pour une finition durable sur ongle naturel avec renforcement.'],
-        gainage:['Gainage gel',__floridaUrl('/ongles/gainage/'),'Pour renforcer la plaque naturelle tout en gardant votre longueur.'],
-        length:['Rallongement gel',__floridaUrl('/ongles/rallongement-gel/'),'Pour créer de la longueur et structurer la forme.'],
-        art:['Nail art',__floridaUrl('/ongles/nail-art/'),'Pour compléter une pose avec une finition ou un design personnalisé.'],
-        remove:['Dépose',__floridaUrl('/ongles/depose/'),'Pour retirer une ancienne matière dans un temps prévu à cet effet.']
+        semi:['Semi-permanent renforcé','/ongles/semi-permanent/','Pour une finition durable sur ongle naturel avec renforcement.'],
+        gainage:['Gainage gel','/ongles/gainage/','Pour renforcer la plaque naturelle tout en gardant votre longueur.'],
+        length:['Rallongement gel','/ongles/rallongement-gel/','Pour créer de la longueur et structurer la forme.'],
+        art:['Nail art','/ongles/nail-art/','Pour compléter une pose avec une finition ou un design personnalisé.'],
+        remove:['Dépose','/ongles/depose/','Pour retirer une ancienne matière dans un temps prévu à cet effet.']
       };
-      const r=map[state.nailGoal]||map.semi;return{title:r[0],url:r[1],why:r[2],alts:[['Voir toutes les prestations ongles',__floridaUrl('/ongles/')]]};
+      const r=map[state.nailGoal]||map.semi;return{title:r[0],url:r[1],why:r[2],alts:[['Voir toutes les prestations ongles','/ongles/']]};
     }
 
     const technical=['balayage','color','extensions','smooth'];
     const consultation=state.hairContext==='yes'&&technical.includes(state.hairGoal);
-    if(consultation)return{title:'Commencer par la consultation premium',url:__floridaUrl('/coiffure/consultation/'),why:'Comme il s’agit d’une première visite ou d’un changement important sur un projet technique, la consultation est l’étape la plus sûre avant de réserver la transformation.',alts:[['Voir la prestation envisagée',goalUrl(state.hairGoal)],['Découvrir la coiffure',__floridaUrl('/coiffure/')]]};
-    if(state.hairGoal==='cut'&&state.hairTexture==='curly')return{title:'Curly Cut',url:__floridaUrl('/coiffure/curly-cut/'),why:'Votre priorité est la coupe et votre texture est bouclée ou frisée : la Curly Cut est pensée spécifiquement autour de la forme naturelle.',alts:[['Coupe Signature',__floridaUrl('/coiffure/coupe-signature/')]]};
+    if(consultation)return{title:'Commencer par la consultation premium',url:'/coiffure/consultation/',why:'Comme il s’agit d’une première visite ou d’un changement important sur un projet technique, la consultation est l’étape la plus sûre avant de réserver la transformation.',alts:[['Voir la prestation envisagée',goalUrl(state.hairGoal)],['Découvrir la coiffure','/coiffure/']]};
+    if(state.hairGoal==='cut'&&state.hairTexture==='curly')return{title:'Curly Cut',url:'/coiffure/curly-cut/',why:'Votre priorité est la coupe et votre texture est bouclée ou frisée : la Curly Cut est pensée spécifiquement autour de la forme naturelle.',alts:[['Coupe Signature','/coiffure/coupe-signature/']]};
     const map={
-      cut:['Coupe Signature',__floridaUrl('/coiffure/coupe-signature/'),'Pour une coupe construite selon votre morphologie, votre texture et vos habitudes.'],
-      curls:['Curly Cut',__floridaUrl('/coiffure/curly-cut/'),'Pour travailler la coupe, le ressort et la définition de votre texture naturelle.'],
-      balayage:['Balayage & éclaircissement',__floridaUrl('/coiffure/balayage/'),'Pour apporter de la lumière ou transformer progressivement la couleur.'],
-      color:['Coloration sur mesure',__floridaUrl('/coiffure/coloration/'),'Pour modifier, raviver ou enrichir votre couleur.'],
-      care:['Soins experts',__floridaUrl('/coiffure/soins/'),'Pour choisir un protocole selon l’état de la fibre et le besoin principal.'],
-      smooth:['Lissage & discipline',__floridaUrl('/coiffure/lissage/'),'Pour faciliter le coiffage et maîtriser frisottis ou texture selon le protocole retenu.'],
-      extensions:['Extensions',__floridaUrl('/coiffure/extensions/'),'Pour construire un projet de longueur, densité ou les deux.']
+      cut:['Coupe Signature','/coiffure/coupe-signature/','Pour une coupe construite selon votre morphologie, votre texture et vos habitudes.'],
+      curls:['Curly Cut','/coiffure/curly-cut/','Pour travailler la coupe, le ressort et la définition de votre texture naturelle.'],
+      balayage:['Balayage & éclaircissement','/coiffure/balayage/','Pour apporter de la lumière ou transformer progressivement la couleur.'],
+      color:['Coloration sur mesure','/coiffure/coloration/','Pour modifier, raviver ou enrichir votre couleur.'],
+      care:['Soins experts','/coiffure/soins/','Pour choisir un protocole selon l’état de la fibre et le besoin principal.'],
+      smooth:['Lissage & discipline','/coiffure/lissage/','Pour faciliter le coiffage et maîtriser frisottis ou texture selon le protocole retenu.'],
+      extensions:['Extensions','/coiffure/extensions/','Pour construire un projet de longueur, densité ou les deux.']
     };
-    const r=map[state.hairGoal]||map.cut;return{title:r[0],url:r[1],why:r[2],alts:[['Voir toutes les prestations coiffure',__floridaUrl('/coiffure/')]]};
+    const r=map[state.hairGoal]||map.cut;return{title:r[0],url:r[1],why:r[2],alts:[['Voir toutes les prestations coiffure','/coiffure/']]};
   }
-  function goalUrl(goal){return({balayage:__floridaUrl('/coiffure/balayage/'),color:__floridaUrl('/coiffure/coloration/'),extensions:__floridaUrl('/coiffure/extensions/'),smooth:__floridaUrl('/coiffure/lissage/')})[goal]||__floridaUrl('/coiffure/')}
+  function goalUrl(goal){return({balayage:'/coiffure/balayage/',color:'/coiffure/coloration/',extensions:'/coiffure/extensions/',smooth:'/coiffure/lissage/'})[goal]||'/coiffure/'}
 
   function renderResult(){
     const r=resultData();

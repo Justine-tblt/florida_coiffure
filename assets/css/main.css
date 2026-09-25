@@ -1611,9 +1611,7 @@ p {
   }
 
   .gallery-center {
-    top: 51%;
-    width: 160px;
-    height: 160px
+    display: none;
   }
 
   .team-grid {
@@ -1662,7 +1660,7 @@ p {
   }
 
   .logo-site img {
-    width: 140px
+    width: 190px
   }
 
   .hero {
@@ -2566,7 +2564,7 @@ p {
   }
 
   .logo-site img {
-    width: 132px
+    width: 190px
   }
 
   .section {
@@ -2953,3 +2951,124 @@ p {
   }
 }
 /* fin plan du site */
+
+/* correctifs ciblés mobile + finder */
+
+/* Le fieldset conserve sinon une largeur intrinsèque qui peut dépasser l'écran. */
+.finder-container,
+.finder-container form,
+.finder-question,
+.finder-choices,
+.finder-choice,
+.finder-choice > span {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.finder-container {
+  width: min(calc(100% - 2rem), 850px);
+}
+
+.finder-choices {
+  width: 100%;
+}
+
+.finder-choice {
+  width: 100%;
+}
+
+.finder-choice strong,
+.finder-choice small,
+.finder-help,
+.finder-result {
+  overflow-wrap: anywhere;
+}
+
+/* Le résumé reste sticky sur desktop mais reprend le flux normal sur mobile. */
+@media (max-width: 800px) {
+  .sticky-summary {
+    position: static;
+    top: auto;
+    align-self: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .finder-container {
+    width: min(calc(100% - 1.25rem), 850px);
+    padding: 1rem;
+  }
+
+  .finder-choices {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* fin correctifs ciblés mobile + finder */
+
+/* fix finder mobile nav */
+
+/* Un élément HTML hidden doit rester réellement masqué,
+   même si .btn définit display:inline-flex. */
+.diag-nav [hidden] {
+  display: none !important;
+}
+
+@media (max-width: 560px) {
+  .diag-nav {
+    display: grid;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.4fr);
+    gap: .75rem;
+    width: 100%;
+  }
+
+  .diag-nav .btn {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    padding-inline: .8rem;
+    white-space: normal;
+  }
+
+  .diag-nav [data-finder-restart]:not([hidden]) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* fin fix finder mobile nav */
+
+/* fix finder continuer mobile */
+
+.diag-nav [hidden] {
+  display: none !important;
+}
+
+@media (max-width: 560px) {
+  .diag-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    width: 100%;
+  }
+
+  .diag-nav .btn {
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .diag-nav [data-finder-next] {
+    flex: 1 1 100%;
+    width: 100%;
+    min-height: 3.4rem;
+    padding: .9rem 1.25rem;
+  }
+
+  .diag-nav [data-finder-back]:not([hidden]),
+  .diag-nav [data-finder-restart]:not([hidden]) {
+    flex: 1 1 calc(50% - .375rem);
+  }
+}
+
+/* fin fix finder continuer mobile */
