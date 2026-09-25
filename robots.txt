@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /sanity-studio/
+Disallow: /produit/
+Disallow: /prestation/
+
+Sitemap: https://www.florida-coiffure.fr/sitemap.xml

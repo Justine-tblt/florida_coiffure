@@ -1,0 +1,1 @@
+export function initFaq(){document.querySelectorAll('.faq-button').forEach(btn=>{const p=document.getElementById(btn.getAttribute('aria-controls'));if(!p)return;btn.addEventListener('click',()=>{const ex=btn.getAttribute('aria-expanded')==='true';btn.setAttribute('aria-expanded',String(!ex));p.hidden=ex;});});}

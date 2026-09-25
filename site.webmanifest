@@ -1,0 +1,10 @@
+{
+  "name":"Florida Coiffure",
+  "short_name":"Florida",
+  "description":"Maison de coiffure & onglerie au Grau-du-Roi",
+  "start_url":"/",
+  "display":"standalone",
+  "background_color":"#fbf8f2",
+  "theme_color":"#24211f",
+  "icons":[{"src":"/assets/images/ui/favicon.png","sizes":"500x500","type":"image/png"}]
+}

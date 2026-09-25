@@ -1,0 +1,16 @@
+export const serviceContent = {
+  consultation: { reviewTag: 'consultation', looks: ['balayage-beige-lumineux', 'brunette-glossy'] },
+  'coupe-signature': { reviewTag: 'coupe-signature', looks: [] },
+  'curly-cut': { reviewTag: 'curly-cut', looks: ['curly-definition'] },
+  balayage: { reviewTag: 'balayage', looks: ['balayage-beige-lumineux', 'soft-blonde'] },
+  coloration: { reviewTag: 'coloration', looks: ['brunette-glossy'] },
+  soins: { reviewTag: 'soins', looks: ['curly-definition', 'soft-blonde'] },
+  extensions: { reviewTag: 'extensions', looks: [] },
+  lissage: { reviewTag: 'lissage', looks: [] },
+  'mise-en-forme': { reviewTag: 'mise-en-forme', looks: [] },
+  'semi-permanent': { reviewTag: 'semi-permanent', looks: ['clean-manicure'] },
+  gainage: { reviewTag: 'gainage', looks: ['nails-french-detail'] },
+  'rallongement-gel': { reviewTag: 'rallongement-gel', looks: ['nails-french-detail'] },
+  'nail-art': { reviewTag: 'nail-art', looks: ['nails-french-detail'] },
+  depose: { reviewTag: 'ongles', looks: [] },
+};
