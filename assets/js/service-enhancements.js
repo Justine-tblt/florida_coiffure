@@ -1,5 +1,11 @@
 import { serviceContent } from './service-content.js';
 import { initReviews } from './reviews.js';
+const __floridaUrl = (path) => {
+  const marker = document.querySelector('meta[name="site-root"]');
+  const root = marker ? new URL(marker.content, document.baseURI) : new URL('./', document.baseURI);
+  return new URL(String(path).replace(/^\//, ''), root).href;
+};
+
 
 const main = document.querySelector('main[data-service-slug]');
 const slug = main?.dataset.serviceSlug;
@@ -8,7 +14,7 @@ const config = slug ? serviceContent[slug] : null;
 if (main && config) {
   const looks = config.looks || [];
   const hasLooks = looks.length > 0;
-  const lookHref = looks.length === 1 ? `/lookbook/#${looks[0]}` : '/lookbook/';
+  const lookHref = looks.length === 1 ? `/lookbook/#${looks[0]}` : __floridaUrl('/lookbook/');
   const lookLabel = looks.length === 1 ? 'Voir ce look' : 'Voir les looks';
 
   const enhancements = document.createElement('div');
